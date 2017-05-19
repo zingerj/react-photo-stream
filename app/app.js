@@ -146,14 +146,17 @@ class App extends Component {
     return (
       <div className={styles.container}>
         <div className={styles.searchContainer}>
-          <input onChange={e => this.setState({ searchTerm: e.target.value })}/>
-          <button onClick={() => this.search()}>SEARCH</button>
+          <input id={styles.searchInput} placeholder="What would you like to see?" value={this.state.searchTerm} onChange={e => this.setState({ searchTerm: e.target.value })}/>
+          <button id={styles.searchButton} className={styles.button} onClick={() => this.search()}>SEARCH</button>
         </div>
-        <Photo src={this.state.current} />
+        <div className={styles.photoContainer}>
+          <Photo src={this.state.current} />
+          <span className={styles.attribution}>Photos provided by <a href="http://pexels.com">Pexels</a></span>
+        </div>
         <div className={styles.controlContainer}>
-          <button onClick={() => this.prev()}>PREV</button>
-          <button onClick={() => this.toggle()}>{this.state.playButton}</button>
-          <button onClick={() => this.next()}>NEXT</button>
+          <button className={styles.button} onClick={() => this.prev()}>⏪</button>
+          <button className={styles.button} onClick={() => this.toggle()}>{this.state.playButton}</button>
+          <button className={styles.button} onClick={() => this.next()}>⏩</button>
         </div>
       </div>
     )
