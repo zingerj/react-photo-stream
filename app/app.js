@@ -33,10 +33,14 @@ class App extends Component {
     }
   }
 
+  // Get initial photos and start interval on first load
+
   componentDidMount() {
     this.getMorePhotos();
     this.setInterval();
   }
+
+  // Called to get additional photos when getting towards the end of array
 
   getMorePhotos() {
     fetch('http://api.pexels.com/v1/popular?per_page=40&page='+this.state.page.toString(), {
@@ -46,7 +50,6 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(resJson => {
-      console.log('got here!', resJson);
       this.setState({
         array: this.state.array.concat(resJson.photos),
         page: this.state.page+1,
@@ -57,6 +60,8 @@ class App extends Component {
       })
     })
   }
+
+  // Changes current, as well as previous and next photos, cycling through array
 
   changePhoto() {
     if (this.state.index >= this.state.array.length-5) {
@@ -69,7 +74,9 @@ class App extends Component {
         index: this.state.index+1
       })
     }
-  }
+
+
+  // Starts interval to change photos every ~3 seconds
 
   setInterval() {
     var interval = setInterval(this.changePhoto.bind(this), 3000)
@@ -80,6 +87,8 @@ class App extends Component {
     })
   }
 
+  // Stops interval (changing photos); used for clicking individually
+
   clearInterval() {
     clearInterval(this.state.intervalId)
     this.setState({
@@ -89,15 +98,20 @@ class App extends Component {
     })
   }
 
+  // Toggles play/pause button
+
   toggle() {
     (this.state.play) ? this.clearInterval() : this.setInterval()
   }
+
+  // Goes to next photo manually and stops interval
 
   next() {
     this.clearInterval();
     this.changePhoto();
   }
 
+  // Goes to previous photo manually and stops interval
 
   prev() {
     this.clearInterval();
@@ -116,6 +130,8 @@ class App extends Component {
     })
   }
 
+  // Searches for keyword and starts new interval of matching images
+
   search() {
     this.clearInterval();
     this.setState({
@@ -128,7 +144,6 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(resJson => {
-      console.log('got here!', resJson);
       this.setState({
         array: resJson.photos,
         prev: resJson.photos[0].src.medium,
