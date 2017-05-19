@@ -25,6 +25,7 @@ class App extends Component {
       current: '',
       prev: '',
       next: '',
+      search: false,
       searchTerm: '',
       page: 1,
       playButton: '⏸️',
@@ -43,6 +44,24 @@ class App extends Component {
   // Called to get additional photos when getting towards the end of array
 
   getMorePhotos() {
+    (this.state.search) ?
+    fetch('http://api.pexels.com/v1/search?query='+this.state.searchTerm+'&per_page=40&page='+this.state.page.toString(), {
+      headers: {
+        'Authorization': API_KEY
+      }
+    })
+    .then(res => res.json())
+    .then(resJson => {
+      this.setState({
+        array: this.state.array.concat(resJson.photos),
+        page: this.state.page+1,
+        prev: resJson.photos[this.state.index].src.medium,
+        current: resJson.photos[this.state.index+1].src.medium,
+        next: resJson.photos[this.state.index+2].src.medium,
+        index: this.state.index+1
+      })
+    })
+    :
     fetch('http://api.pexels.com/v1/popular?per_page=40&page='+this.state.page.toString(), {
       headers: {
         'Authorization': API_KEY
@@ -74,7 +93,7 @@ class App extends Component {
         index: this.state.index+1
       })
     }
-
+  }
 
   // Starts interval to change photos every ~3 seconds
 
@@ -135,6 +154,7 @@ class App extends Component {
   search() {
     this.clearInterval();
     this.setState({
+      search: true,
       page: 1
     })
     fetch('http://api.pexels.com/v1/search?query='+this.state.searchTerm+'&per_page=40&page='+this.state.page.toString(), {
