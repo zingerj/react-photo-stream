@@ -45,7 +45,7 @@ class App extends Component {
 
   getMorePhotos() {
     (this.state.search) ?
-    fetch('http://api.pexels.com/v1/search?query='+this.state.searchTerm+'&per_page=40&page='+this.state.page.toString(), {
+    fetch('https://api.pexels.com/v1/search?query='+this.state.searchTerm+'&per_page=40&page='+this.state.page.toString(), {
       headers: {
         'Authorization': API_KEY
       }
@@ -62,7 +62,7 @@ class App extends Component {
       })
     })
     :
-    fetch('http://api.pexels.com/v1/popular?per_page=40&page='+this.state.page.toString(), {
+    fetch('https://api.pexels.com/v1/popular?per_page=40&page='+this.state.page.toString(), {
       headers: {
         'Authorization': API_KEY
       }
@@ -157,7 +157,7 @@ class App extends Component {
       search: true,
       page: 1
     })
-    fetch('http://api.pexels.com/v1/search?query='+this.state.searchTerm+'&per_page=40&page='+this.state.page.toString(), {
+    fetch('https://api.pexels.com/v1/search?query='+this.state.searchTerm+'&per_page=40&page='+this.state.page.toString(), {
       headers: {
         'Authorization': API_KEY
       }
