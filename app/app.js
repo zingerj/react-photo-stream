@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './style.css';
 
-const API_KEY = '563492ad6f917000010000010ffdc1361bab44156e895c10c03716b6';
+const API_KEY = process.env.API_KEY;
 
 class Photo extends Component {
   constructor(props) {
