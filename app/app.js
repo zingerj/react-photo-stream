@@ -61,6 +61,9 @@ class App extends Component {
         index: this.state.index+1
       })
     })
+    .catch(e => {
+      console.error('error', e);
+    })
     :
     fetch('https://api.pexels.com/v1/popular?per_page=40&page='+this.state.page.toString(), {
       headers: {
@@ -77,6 +80,9 @@ class App extends Component {
         next: resJson.photos[this.state.index+2].src.medium,
         index: this.state.index+1
       })
+    })
+    .catch(e => {
+      console.error('error', e);
     })
   }
 
@@ -174,6 +180,9 @@ class App extends Component {
     })
     .then(() => {
       this.setInterval();
+    })
+    .catch(e => {
+      console.error('error', e);
     })
   }
 
