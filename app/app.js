@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './style.css';
 
-const API_KEY = process.env.API_KEY;
-
 class Photo extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +28,8 @@ class App extends Component {
       page: 1,
       playButton: '⏸️',
       play: true,
-      intervalId: null
+      intervalId: null,
+      API_KEY: process.env.API_KEY
     }
   }
 
@@ -47,7 +46,7 @@ class App extends Component {
     (this.state.search) ?
     fetch('https://api.pexels.com/v1/search?query='+this.state.searchTerm+'&per_page=40&page='+this.state.page.toString(), {
       headers: {
-        'Authorization': API_KEY
+        'Authorization': this.state.API_KEY
       }
     })
     .then(res => res.json())
@@ -67,7 +66,7 @@ class App extends Component {
     :
     fetch('https://api.pexels.com/v1/popular?per_page=40&page='+this.state.page.toString(), {
       headers: {
-        'Authorization': API_KEY
+        'Authorization': this.state.API_KEY
       }
     })
     .then(res => res.json())
@@ -165,7 +164,7 @@ class App extends Component {
     })
     fetch('https://api.pexels.com/v1/search?query='+this.state.searchTerm+'&per_page=40&page='+this.state.page.toString(), {
       headers: {
-        'Authorization': API_KEY
+        'Authorization': this.state.API_KEY
       }
     })
     .then(res => res.json())
