@@ -28,8 +28,7 @@ class App extends Component {
       page: 1,
       playButton: '⏸️',
       play: true,
-      intervalId: null,
-      API_KEY: process.env.API_KEY
+      intervalId: null
     }
   }
 
@@ -46,7 +45,7 @@ class App extends Component {
     (this.state.search) ?
     fetch('https://api.pexels.com/v1/search?query='+this.state.searchTerm+'&per_page=40&page='+this.state.page.toString(), {
       headers: {
-        'Authorization': this.state.API_KEY
+        'Authorization': API_KEY
       }
     })
     .then(res => res.json())
@@ -66,7 +65,7 @@ class App extends Component {
     :
     fetch('https://api.pexels.com/v1/popular?per_page=40&page='+this.state.page.toString(), {
       headers: {
-        'Authorization': this.state.API_KEY
+        'Authorization': API_KEY
       }
     })
     .then(res => res.json())
@@ -164,7 +163,7 @@ class App extends Component {
     })
     fetch('https://api.pexels.com/v1/search?query='+this.state.searchTerm+'&per_page=40&page='+this.state.page.toString(), {
       headers: {
-        'Authorization': this.state.API_KEY
+        'Authorization': API_KEY
       }
     })
     .then(res => res.json())

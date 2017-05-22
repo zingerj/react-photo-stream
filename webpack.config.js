@@ -7,6 +7,10 @@
     inject: 'body'
  });
 
+ var DefinePlugin = new webpack.DefinePlugin({
+  API_KEY: JSON.stringify('563492ad6f917000010000010ffdc1361bab44156e895c10c03716b6')
+});
+
  module.exports = {
      entry: './app/app.js',
      output: {
@@ -38,5 +42,5 @@
          colors: true
      },
      devtool: 'source-map',
-     plugins: [HTMLWebpackPluginConfig]
+     plugins: [HTMLWebpackPluginConfig, DefinePlugin]
  };
