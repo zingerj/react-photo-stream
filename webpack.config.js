@@ -8,7 +8,7 @@
  });
 
  var DefinePlugin = new webpack.DefinePlugin({
-  API_KEY: JSON.stringify('563492ad6f917000010000010ffdc1361bab44156e895c10c03716b6')
+  API_KEY: JSON.stringify(process.env.API_KEY)
 });
 
  module.exports = {
