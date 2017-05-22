@@ -184,6 +184,12 @@ class App extends Component {
     })
   }
 
+  // Clears interval on unmount
+
+  componentWillUnmount() {
+    this.clearInterval();
+  }
+
   render() {
     return (
       <div className={styles.container}>
